@@ -1,5 +1,7 @@
 """
 Main file for lanching travtools tkinter gui
+
+The Spinbox widget provides an input box for numerical values. It has arrows to increase and decrease the value.
 """
 
 import tkinter as tk
@@ -13,18 +15,17 @@ root.geometry("300x300+50+50")
 
 
 # Actions
-def return_pressed(event):
-    label.config(text=event.widget.get())
-
-
-entry = tk.Entry(root)
-entry.insert(0, "Enter your text")
-entry.bind("<Return>", return_pressed)
-entry.pack(padx=5, pady=5, fill="x")
-
+spinbox_var = tk.StringVar(value="0")
+spinbox = tk.Spinbox(
+    root,
+    from_=-10,
+    to=10,
+    textvariable=spinbox_var,
+)
+spinbox.pack(padx=5, pady=5, fill="x")
 
 # helper label to show the selected value
-label = tk.Label(root, text="Entry demo!")
+label = tk.Label(root, textvariable=spinbox_var)
 label.pack(padx=5, pady=5, fill="x")
 
 root.mainloop()
