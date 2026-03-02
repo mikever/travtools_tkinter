@@ -1,7 +1,8 @@
 """
 Main file for lanching travtools tkinter gui
 
-The Spinbox widget provides an input box for numerical values. It has arrows to increase and decrease the value.
+The Scale widget provides a slide-bar that works much like a Spinbox.
+Rather than displaying the current value numerically, it displays the position of the slider handle along the length of the widget.
 """
 
 import tkinter as tk
@@ -15,17 +16,16 @@ root.geometry("300x300+50+50")
 
 
 # Actions
-spinbox_var = tk.StringVar(value="0")
-spinbox = tk.Spinbox(
-    root,
-    from_=-10,
-    to=10,
-    textvariable=spinbox_var,
-)
-spinbox.pack(padx=5, pady=5, fill="x")
+def value_changed(event):
+    label.config(text=event.widget.get())
+
+
+scale = tk.Scale(root, from_=0, to=10, orient="horizontal")
+scale.bind("<Motion>", value_changed)
+scale.pack(padx=5, pady=5, fill="x")
 
 # helper label to show the selected value
-label = tk.Label(root, textvariable=spinbox_var)
+label = tk.Label(root, text="0")
 label.pack(padx=5, pady=5, fill="x")
 
 root.mainloop()
